@@ -13,7 +13,6 @@ public class StringCalculator {
         }
         sum += number;
     }
-    nombre del commit:Added logic to ignore numbers greater than 1000.
 
     if (numbers.startsWith("//")) {
         int delimiterIndex = numbers.indexOf("\n");
@@ -21,7 +20,8 @@ public class StringCalculator {
         numbers = numbers.substring(delimiterIndex + 1);
         delimiter = rawDelimiters.replace("[", "").replace("]", "");
     }
-    
+
+
     
     
 
