@@ -10,14 +10,14 @@ public class StringCalculator {
         if (numbers == null || numbers.isEmpty()) {
             return 0;
         }
-
-        String[] parts = numbers.split(",");
+    
+        String[] parts = numbers.split(",|\n");
         int sum = 0;
         for (String part : parts) {
-            sum += Double.parseDouble(part.trim());
+            sum += Integer.parseInt(part.trim());
         }
         return sum;
     }
-    // nombre del commit: Implemented Add method for 0-2 numbers.
+    
 
     
