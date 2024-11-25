@@ -6,23 +6,18 @@ public class StringCalculator {
         System.out.println(calculator.add("1")); 
         System.out.println(calculator.add("1.5,30.5")); 
     }
-    for (String part : parts) {
-        int number = Integer.parseInt(part.trim());
-        if (number > 1000) {
-            continue;
+    public int add(String numbers) {
+        if (numbers == null || numbers.isEmpty()) {
+            return 0;
         }
-        sum += number;
+
+        String[] parts = numbers.split(",");
+        int sum = 0;
+        for (String part : parts) {
+            sum += Double.parseDouble(part.trim());
+        }
+        return sum;
     }
-
-    if (numbers.startsWith("//")) {
-        int delimiterIndex = numbers.indexOf("\n");
-        String rawDelimiters = numbers.substring(2, delimiterIndex);
-        numbers = numbers.substring(delimiterIndex + 1);
-        delimiter = rawDelimiters.replace("[", "").replace("]", "");
-    }
-
-
-    
     
 
     
