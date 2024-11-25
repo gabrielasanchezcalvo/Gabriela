@@ -3,19 +3,18 @@ module StringCalculator
 let add (numbers: string) =
     match numbers with
     | "" -> 0
-    | _ when numbers.StartsWith("//") ->
-        let delimiterEnd = numbers.IndexOf('\n')
-        let customDelimiter = numbers.[2..delimiterEnd-1]
-        let numbersPart = numbers.[delimiterEnd+1..]
-        let parts = numbersPart.Split([| customDelimiter |], System.StringSplitOptions.None)
-        parts |> Array.map int |> Array.sum
     | _ ->
         let delimiters = [| ','; '\n' |]
-        let parts = numbers.Split(delimiters)
-        parts |> Array.map int |> Array.sum
+        let parts = numbers.Split(delimiters) |> Array.map int
+        let negatives = parts |> Array.filter (fun x -> x < 0)
+        if negatives.Length > 0 then
+            failwithf "Negatives not allowed: %A" negatives
+        parts |> Array.filter (fun x -> x >= 0) |> Array.sum
 
 // Pruebas
-printfn "%d" (add "//;\n1;2") // 3
+printfn "%d" (add "1,2")       // 3
+printfn "%d" (add "1,-2,-3")   // Excepción: "Negatives not allowed: [-2; -3]"
+
 
 
 
