@@ -20,8 +20,20 @@ public class StringCalculator {
     
         String[] parts = numbers.split(delimiter);
         int sum = 0;
+        StringBuilder negatives = new StringBuilder();
+    
         for (String part : parts) {
-            sum += Integer.parseInt(part.trim());
+            int number = Integer.parseInt(part.trim());
+            if (number < 0) {
+                negatives.append(number).append(" ");
+            } else {
+                sum += number;
+            }
         }
+    
+        if (negatives.length() > 0) {
+            throw new IllegalArgumentException("Negatives not allowed: " + negatives.toString().trim());
+        }
+    
         return sum;
     }
