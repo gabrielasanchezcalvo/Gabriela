@@ -5,9 +5,10 @@ let add (numbers: string) =
     | "" -> 0
     | _ when numbers.StartsWith("//") ->
         let delimiterEnd = numbers.IndexOf('\n')
-        let customDelimiter = numbers.[2..delimiterEnd-1]
+        let rawDelimiters = numbers.[2..delimiterEnd-1]
+        let delimiters = rawDelimiters.Split([| '['; ']' |], System.StringSplitOptions.RemoveEmptyEntries)
         let numbersPart = numbers.[delimiterEnd+1..]
-        let parts = numbersPart.Split([| customDelimiter |], System.StringSplitOptions.None)
+        let parts = numbersPart.Split(delimiters, System.StringSplitOptions.None)
         parts |> Array.map int |> Array.filter (fun x -> x <= 1000) |> Array.sum
     | _ ->
         let delimiters = [| ','; '\n' |]
@@ -15,7 +16,7 @@ let add (numbers: string) =
         parts |> Array.map int |> Array.filter (fun x -> x <= 1000) |> Array.sum
 
 // Pruebas
-printfn "%d" (add "//[***]\n1***2***3") // 6
+printfn "%d" (add "//[*][%]\n1*2%3") // 6
 
 
 
