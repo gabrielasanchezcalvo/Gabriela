@@ -10,5 +10,5 @@ public class StringCalculator {
         int delimiterIndex = numbers.indexOf("\n");
         String rawDelimiters = numbers.substring(2, delimiterIndex);
         numbers = numbers.substring(delimiterIndex + 1);
-        delimiter = rawDelimiters.replace("[", "").replace("]", "|");
+        delimiter = rawDelimiters.replaceAll("\\[", "").replaceAll("\\]", "|");
     }
